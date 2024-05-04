@@ -31,15 +31,15 @@ for i in range(2, img_copy.shape[0]-2):
         """
         axis=(0, 1) estaría calculando la varianza de cada canal de color en cada cuadrante.
         """
-        total_variances = [np.sum(varianza) for varianza in varianzas]
+        varianzas_totales = [np.sum(varianza) for varianza in varianzas]
         
         # Seleccionar el cuadrante con la suma de varianzas más baja
-        min_variance_quadrant = cuadrantes[np.argmin(total_variances)]
+        cuadrante_varianza_minima = cuadrantes[np.argmin(varianzas_totales)]
         
         # Calcular el promedio de cada color para los pixeles del cuadrante seleccionado
-        avg_color = np.mean(min_variance_quadrant, axis=(0, 1))
+        color_promedio = np.mean(cuadrante_varianza_minima, axis=(0, 1))
         
         # Asignar este promedio al pixel actual en la imagen copiada
-        img_copy[i, j] = avg_color
+        img_copy[i, j] = color_promedio
 
 # Devolver la imagen copiada modificada
