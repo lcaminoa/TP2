@@ -1,2 +1,2 @@
-# tp1
-Trabajo Práctico 1 de Pensamiento Computacional
+# TP2
+Trabajo Práctico 2 de Pensamiento Computacional
