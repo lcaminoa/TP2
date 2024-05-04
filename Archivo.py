@@ -13,3 +13,5 @@ img_np_padding = np.pad(img_np, ((2, 2), (2, 2), (0, 0)), mode="edge")
 #Convertir la matriz NumPy a una imagen PIL y guardarla
 img_padding = Image.fromarray(img_np_padding)
 img_padding.save('imagen_padding.jpg')
+
+print("Hola")
