@@ -43,3 +43,5 @@ for i in range(2, img_copy.shape[0]-2):
         img_copy[i, j] = color_promedio
 
 # Devolver la imagen copiada modificada
+
+print("prueba")
