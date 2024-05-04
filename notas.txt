@@ -1,0 +1,5 @@
+numpy.pad para agregar el padding
+
+numpy.var para la varianza
+
+Deepcopy para copiar la imagen y analizarla luego
