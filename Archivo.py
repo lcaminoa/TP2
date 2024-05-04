@@ -22,10 +22,10 @@ for i in range(2, img_copy.shape[0]-2):
         entorno = img_copy[i-2:i+3, j-2:j+3]
         
         # Dividir este entorno en cuatro cuadrantes
-        cuadrantes = [entorno[:2, :2], entorno[:2, 2:], entorno[2:, :2], entorno[2:, 2:]]
+        cuadrantes = [entorno[:3, :3], entorno[:3, 2:], entorno[2:, :3], entorno[2:, 2:]]
 
-        # Puede que haya un error y no incluya la cruz. Sol: Que el slicing termine en 3.
-        
+        # El slicing termina en :3 porque el 3 no se incluye, queda de 0 a 2.
+
         # Calcular la varianza de los canales rojo, verde y azul y sumar estas varianzas
         varianzas = [np.var(cuadrante, axis=(0, 1)) for cuadrante in cuadrantes] # Se agrega a la lista las varianzas de cada cuadrante
         """
@@ -40,8 +40,8 @@ for i in range(2, img_copy.shape[0]-2):
         color_promedio = np.mean(cuadrante_varianza_minima, axis=(0, 1))
         
         # Asignar este promedio al pixel actual en la imagen copiada
-        img_copy[i, j] = color_promedio
+        img_np_padding[i, j] = color_promedio
 
 # Devolver la imagen copiada modificada
-
-print('prueba')
+img_modified = Image.fromarray(img_np_padding)
+img_modified.save("/Users/Nico/Documents/Vs Code UDESA/TP2/Archivo_modified.jpg")
