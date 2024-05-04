@@ -39,9 +39,12 @@ for i in range(2, img_copy.shape[0]-2):
         # Calcular el promedio de cada color para los pixeles del cuadrante seleccionado
         color_promedio = np.mean(cuadrante_varianza_minima, axis=(0, 1))
         
-        # Asignar este promedio al pixel actual en la imagen copiada
+        # Asignar este promedio al pixel actual en la imagen ORIGINAL con padding
         img_np_padding[i, j] = color_promedio
 
-# Devolver la imagen copiada modificada
-img_modified = Image.fromarray(img_np_padding)
+# Quitar padding de la imagen con padding
+img_np_final = img_np_padding[2:-2, 2:-2, :]       
+
+# Devolver la imagen final
+img_modified = Image.fromarray(img_np_final)
 img_modified.save("/Users/Nico/Documents/Vs Code UDESA/TP2/Archivo_modified.jpg")
