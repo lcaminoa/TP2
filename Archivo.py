@@ -44,3 +44,4 @@ for i in range(2, img_copy.shape[0]-2):
 
 # Devolver la imagen copiada modificada
 
+print("prueba")
