@@ -15,3 +15,4 @@ img_padding = Image.fromarray(img_np_padding)
 img_padding.save('imagen_padding.jpg')
 
 print("Hola")
+print("Chau")
