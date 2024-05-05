@@ -46,5 +46,26 @@ for i in range(2, img_copy.shape[0]-2):
 img_np_final = img_np_padding[2:-2, 2:-2, :]       
 
 # Devolver la imagen final
-img_modified = Image.fromarray(img_np_final)
-img_modified.save("/Users/Nico/Documents/Vs Code UDESA/TP2/Archivo_modified.jpg")
+img_modificada = Image.fromarray(img_np_final)
+img_modificada.save("baboon_modificada.jpg")
+
+#Diccionario con los valores de cada caracter
+valores = {
+    "a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7, "h": 8, "i": 9, "j": 10, 
+    "k": 11, "l": 12, "m": 13, "n": 14, "o": 15, "p": 16, "q": 17, "r": 18, "s": 19, 
+    "t": 20, "u": 21, "v": 22, "w": 23, "x": 24, "y": 25, "z": 26, " ": 27, ".": 28, 
+    ",": 29, "?": 30, "!": 31, "¿": 32, "¡": 33, "(": 34, ")": 35, ":": 36, ";": 37, 
+    "-": 38, "“": 39, "‘": 40, "á": 41, "é": 42, "í": 43, "ó": 44, "ú": 45, "ü": 46, "ñ": 47
+}
+mensaje = input("Ingrese un mensaje: ").lower() # Se convierte el mensaje a minúsculas
+# Entre cada número, se pone un -1 para indicar el final de la letra
+
+# Falta agregar el -1 al final de cada letra
+
+mensaje_codificado = [valores[caracter] for caracter in mensaje] # Se codifica el mensaje
+
+# Se divide cada número en sus dígitos, y a cada digito se le suma 1
+mensaje_codificado = [int(digito) + 1 for numero in mensaje_codificado for digito in str(numero)]
+
+# Se agrega un 0 al final del mensaje
+mensaje_codificado.append(0)
