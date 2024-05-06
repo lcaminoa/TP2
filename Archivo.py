@@ -58,14 +58,17 @@ valores = {
     "-": 38, "“": 39, "‘": 40, "á": 41, "é": 42, "í": 43, "ó": 44, "ú": 45, "ü": 46, "ñ": 47
 }
 mensaje = input("Ingrese un mensaje: ").lower() # Se convierte el mensaje a minúsculas
-# Entre cada número, se pone un -1 para indicar el final de la letra
 
-# Falta agregar el -1 al final de cada letra
+mensaje_traducido = [valores[caracter] for caracter in mensaje] # Se convierte el mensaje en una lista con cada valor
 
-mensaje_codificado = [valores[caracter] for caracter in mensaje] # Se codifica el mensaje
+mensaje_codificado = []
 
-# Se divide cada número en sus dígitos, y a cada digito se le suma 1
-mensaje_codificado = [int(digito) + 1 for numero in mensaje_codificado for digito in str(numero)]
+for numero in mensaje_traducido:
+    for caracter in str(numero):
+        mensaje_codificado.append(int(caracter) + 1)
+    mensaje_codificado.append(-1)
 
 # Se agrega un 0 al final del mensaje
 mensaje_codificado.append(0)
+
+print(mensaje_codificado)
