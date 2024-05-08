@@ -93,7 +93,7 @@ for i in range(0, imagenArray.shape[0], 2): # Recorro las filas de a 2 pasos.
             pixel_primario = entorno[1, 1]
             
             # Defino los 3 pixeles en los que calculo la varianza (no terminado)
-            pixeles_secundarios = [entorno[0, 0], entorno[0, 1], entorno[1, 0]]
+            pixeles_secundarios = [entorno[0][0], entorno[0][1], entorno[1][0]]
             print(pixeles_secundarios)
     
             # Calcular la varianza de cada canal de color por separado de los secundarios
