@@ -11,29 +11,29 @@ def filtro_kuwahara(direc_img):
     # Abrir imagen
     img = Image.open(direc_img)
 
-    # Convertir imagen a array de numpy
+    # Convertir imagen a array de numpy.
     img_np = np.array(img)
 
-    # Añadir padding de 2 pixeles con el color del pixel más cercano
+    # Añadir padding de 2 pixeles con el color del pixel más cercano.
     img_np_padding = np.pad(img_np, ((2, 2), (2, 2), (0, 0)), mode="edge")
 
-    # Crear una copia profunda de la imagen array con el padding
+    # Crear una copia profunda de la imagen array con el padding.
     img_copy = deepcopy(img_np_padding)
 
-    # Recorrer cada pixel de la imagen copiada
+    # Recorrer cada pixel de la imagen copiada.
     for i in range(2, img_copy.shape[0]-2):
         for j in range(2, img_copy.shape[1]-2):
             
             # Tomar un entorno de 5x5
             entorno = img_copy[i-2:i+3, j-2:j+3]
             
-            # Dividir este entorno en cuatro cuadrantes
+            # Dividir este entorno en cuatro cuadrantes.
             cuadrantes = [entorno[:3, :3], entorno[:3, 2:], entorno[2:, :3], entorno[2:, 2:]]
 
             # El slicing termina en :3 porque el 3 no se incluye, queda de 0 a 2.
 
-            # Calcular la varianza de los canales rojo, verde y azul y sumar estas varianzas
-            varianzas = [np.var(cuadrante, axis=(0, 1)) for cuadrante in cuadrantes] # Se agrega a la lista las varianzas de cada cuadrante
+            # Calcular la varianza de los canales rojo, verde y azul y sumar estas varianzas.
+            varianzas = [np.var(cuadrante, axis=(0, 1)) for cuadrante in cuadrantes] # Se agrega a la lista las varianzas de cada cuadrante.
             """
             axis=(0, 1) estaría calculando la varianza de cada canal de color en cada cuadrante.
             """
@@ -52,11 +52,10 @@ def filtro_kuwahara(direc_img):
     img_np_final = img_np_padding[2:-2, 2:-2, :]       
 
     # Devolver la imagen final
-    img_modificada = Image.fromarray(img_np_final)
-    return img_modificada
+    return img_np_final
 
 def encriptador_mensaje(mensaje):
-    #Diccionario con los valores de cada caracter
+    #Diccionario con los valores de cada caracter.
     valores = {
         "a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7, "h": 8, "i": 9, "j": 10, 
         "k": 11, "l": 12, "m": 13, "n": 14, "o": 15, "p": 16, "q": 17, "r": 18, "s": 19, 
@@ -65,7 +64,7 @@ def encriptador_mensaje(mensaje):
         "-": 38, "“": 39, "‘": 40, "á": 41, "é": 42, "í": 43, "ó": 44, "ú": 45, "ü": 46, "ñ": 47
     }
 
-    mensaje_traducido = [valores[caracter] for caracter in mensaje] # Se convierte el mensaje en una lista con cada valor
+    mensaje_traducido = [valores[caracter] for caracter in mensaje] # Se convierte el mensaje en una lista con cada valor.
 
     mensaje_codificado = []
 
@@ -74,22 +73,21 @@ def encriptador_mensaje(mensaje):
             mensaje_codificado.append(int(caracter) + 1)
         mensaje_codificado.append(-1)
 
-    # Se agrega un 0 al final del mensaje
+    # Se agrega un 0 al final del mensaje.
     mensaje_codificado.append(0)
 
-    print(mensaje_codificado)
 
-imagen = filtro_kuwahara("baboon.jpg")
+# Llamo a la funcion del filtro y guardo la imagen ya hecha array en una variable.
+imagenArray = filtro_kuwahara("baboon.jpg")
 
 
-"""
-mensaje = input("Ingrese un mensaje: ").lower() # Se convierte el mensaje a minúsculas
-encriptador_mensaje(mensaje)
-"""
-# Necesito que me 
-for i in range(0, imagen.shape[0], 2):
-        for j in range(0, imagen.shape[1], 2):
+mensaje = input("Ingrese un mensaje: ").lower() # Se convierte el mensaje a minúsculas.
+encriptador_mensaje(mensaje) # Encripto el mensaje llamado la funcion con el mensaje ingresado.
+
+# Necesito que me ...?
+for i in range(0, imagenArray.shape[0], 2): # Recorro las filas de a 2 pasos.
+        for j in range(0, imagenArray.shape[1], 2): # Por cada fila, recorro las columnas de a 2 pasos.
             
             # Tomar un entorno de 2x2
-            entorno = imagen[i:i+2, j:j+2]
-            print(entorno)
+            entorno = imagenArray[i:i+2, j:j+2] # i+2 va de i a i+1, el 2 no se incluye. Mismo con j.
+            #print(entorno)
