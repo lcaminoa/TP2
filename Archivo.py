@@ -77,12 +77,11 @@ def encriptador_mensaje(mensaje):
     mensaje_codificado.append(0)
 
 
-# Llamo a la funcion del filtro y guardo la imagen ya hecha array en una variable.
-imagenArray = filtro_kuwahara("baboon.jpg")
-
-
 mensaje = input("Ingrese un mensaje: ").lower() # Se convierte el mensaje a minúsculas.
 encriptador_mensaje(mensaje) # Encripto el mensaje llamado la funcion con el mensaje ingresado.
+
+# Llamo a la funcion del filtro y guardo la imagen ya hecha array en una variable.
+imagenArray = filtro_kuwahara("baboon.jpg")
 
 # Necesito que me ...?
 for i in range(0, imagenArray.shape[0], 2): # Recorro las filas de a 2 pasos.
@@ -90,4 +89,6 @@ for i in range(0, imagenArray.shape[0], 2): # Recorro las filas de a 2 pasos.
             
             # Tomar un entorno de 2x2
             entorno = imagenArray[i:i+2, j:j+2] # i+2 va de i a i+1, el 2 no se incluye. Mismo con j.
-            #print(entorno)
+            
+            pixel_primario = entorno[1, 1]
+         
