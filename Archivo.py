@@ -91,4 +91,12 @@ for i in range(0, imagenArray.shape[0], 2): # Recorro las filas de a 2 pasos.
             entorno = imagenArray[i:i+2, j:j+2] # i+2 va de i a i+1, el 2 no se incluye. Mismo con j.
             
             pixel_primario = entorno[1, 1]
-         
+            '''
+            # Defino los 3 pixeles en los que calculo la varianza (no terminado)
+
+            pixeles_secundarios = [entorno[0, 0], entorno[0, 1], entorno[1, 0]]
+            print(pixeles_secundarios)
+            varianza_secundarios = [np.var(pixel) for pixel in pixeles_secundarios]
+            print(varianza_secundarios)
+            '''
+            
