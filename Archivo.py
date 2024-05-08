@@ -89,14 +89,28 @@ for i in range(0, imagenArray.shape[0], 2): # Recorro las filas de a 2 pasos.
             
             # Tomar un entorno de 2x2
             entorno = imagenArray[i:i+2, j:j+2] # i+2 va de i a i+1, el 2 no se incluye. Mismo con j.
-            
+        
             pixel_primario = entorno[1, 1]
-            '''
+            
             # Defino los 3 pixeles en los que calculo la varianza (no terminado)
-
             pixeles_secundarios = [entorno[0, 0], entorno[0, 1], entorno[1, 0]]
             print(pixeles_secundarios)
-            varianza_secundarios = [np.var(pixel) for pixel in pixeles_secundarios]
-            print(varianza_secundarios)
-            '''
-            
+    
+            # Calcular la varianza de cada canal de color por separado de los secundarios
+            varianza_rojo = np.var([pixel[0] for pixel in pixeles_secundarios])
+            varianza_verde = np.var([pixel[1] for pixel in pixeles_secundarios])
+            varianza_azul = np.var([pixel[2] for pixel in pixeles_secundarios])
+
+            # Obtener el canal de color con la menor varianza
+            canal_menor_varianza = np.argmin([varianza_rojo, varianza_verde, varianza_azul])
+            #print(canal_menor_varianza)
+
+
+            promedio_suma = 0
+            # Calcular el promedio de los pixeles secundarios en el canal con menor varianza
+            for pixel in pixeles_secundarios:
+                promedio_suma += pixel[canal_menor_varianza]
+            promedio = promedio_suma / 3
+
+            # Asignar este promedio al pixel primario en el canal calculado
+            pixel_primario[canal_menor_varianza] = promedio
