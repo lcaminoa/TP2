@@ -90,44 +90,58 @@ def encriptador_mensaje(mensaje: str) -> list:
 mensaje = input("Ingrese un mensaje: ").lower() # Se convierte el mensaje a minúsculas.
 mensaje_encriptado = encriptador_mensaje(mensaje) # Encripto el mensaje llamado la funcion con el mensaje ingresado.
 
-# Llamo a la funcion del filtro y guardo la imagen ya hecha array en una variable.
-imagenArray = filtro_kuwahara("baboon.jpg")
 
-index_del_mensaje = 0
-# Necesito que me analice cada celda de la imagen.
-for i in range(0, imagenArray.shape[0], 2): # Recorro las filas de a 2 pasos.
-        for j in range(0, imagenArray.shape[1], 2): # Por cada fila, recorro las columnas de a 2 pasos.
-            
-            # Tomar un entorno de 2x2
-            entorno = imagenArray[i:i+2, j:j+2] # i+2 va de i a i+1, el 2 no se incluye. Mismo con j.
-        
-            pixel_primario = entorno[1, 1]
-            
-            # Defino los 3 pixeles en los que calculo la varianza (no terminado)
-            pixeles_secundarios = [entorno[0, 0], entorno[0, 1], entorno[1, 0]]
-    
-            # Calcular la varianza de cada canal de color por separado de los secundarios
-            varianza_rojo = np.var([pixel[0] for pixel in pixeles_secundarios])
-            varianza_verde = np.var([pixel[1] for pixel in pixeles_secundarios])
-            varianza_azul = np.var([pixel[2] for pixel in pixeles_secundarios])
+def esconder_mensaje_imagen(direc_imagen, mensaje_encriptado):
+    """
+    Recibe un mensaje encriptado y lo esconde en una imagen.
+    Args:
+        direc_imagen: Dirección de la imagen en la que se esconderá el mensaje.
+        mensaje_encriptado: Mensaje encriptado.
+    Returns:
+        Devuelve la imagen con el mensaje escondido.
+    """
 
-            # Obtener el canal de color con la menor varianza
-            canal_menor_varianza = np.argmin([varianza_rojo, varianza_verde, varianza_azul])
-            #print(canal_menor_varianza)
+    # Llamo a la funcion del filtro y guardo la imagen ya hecha array en una variable.
+    imagenArray = filtro_kuwahara(direc_imagen)
 
-            if index_del_mensaje <= len(mensaje_encriptado)-1:
-            
-                promedio_suma = 0
-                # Calcular el promedio de los pixeles secundarios en el canal con menor varianza
-                for pixel in pixeles_secundarios:
-                    promedio_suma += pixel[canal_menor_varianza]
-                promedio = promedio_suma / 3
-            
-                # Nuevo valor del pixel primario. Le sumo el numero del mensaje encriptado y hago modulo 256.
-                nuevo_pixel = (promedio + mensaje_encriptado[index_del_mensaje]) % 256
-            
-                # Asignar este promedio al pixel primario en el canal calculado
-                pixel_primario[canal_menor_varianza] = nuevo_pixel
-
-                index_del_mensaje += 1
+    index_del_mensaje = 0
+    # Necesito que me analice cada celda de la imagen.
+    for i in range(0, imagenArray.shape[0], 2): # Recorro las filas de a 2 pasos.
+            for j in range(0, imagenArray.shape[1], 2): # Por cada fila, recorro las columnas de a 2 pasos.
                 
+                # Tomar un entorno de 2x2
+                entorno = imagenArray[i:i+2, j:j+2] # i+2 va de i a i+1, el 2 no se incluye. Mismo con j.
+            
+                pixel_primario = entorno[1, 1]
+                
+                # Defino los 3 pixeles en los que calculo la varianza (no terminado)
+                pixeles_secundarios = [entorno[0, 0], entorno[0, 1], entorno[1, 0]]
+        
+                # Calcular la varianza de cada canal de color por separado de los secundarios
+                varianza_rojo = np.var([pixel[0] for pixel in pixeles_secundarios])
+                varianza_verde = np.var([pixel[1] for pixel in pixeles_secundarios])
+                varianza_azul = np.var([pixel[2] for pixel in pixeles_secundarios])
+
+                # Obtener el canal de color con la menor varianza
+                canal_menor_varianza = np.argmin([varianza_rojo, varianza_verde, varianza_azul])
+                #print(canal_menor_varianza)
+
+                if index_del_mensaje <= len(mensaje_encriptado)-1:
+                
+                    promedio_suma = 0
+                    # Calcular el promedio de los pixeles secundarios en el canal con menor varianza
+                    for pixel in pixeles_secundarios:
+                        promedio_suma += pixel[canal_menor_varianza]
+                    promedio = promedio_suma / 3
+                
+                    # Nuevo valor del pixel primario. Le sumo el numero del mensaje encriptado y hago modulo 256.
+                    nuevo_pixel = (promedio + mensaje_encriptado[index_del_mensaje]) % 256
+                
+                    # Asignar este promedio al pixel primario en el canal calculado
+                    pixel_primario[canal_menor_varianza] = nuevo_pixel
+
+                    index_del_mensaje += 1
+    Imagen_final = Image.fromarray(imagenArray)
+    Imagen_final.save("imagen_con_mensaje.png")
+
+esconder_mensaje_imagen("baboon.jpg", mensaje_encriptado)
