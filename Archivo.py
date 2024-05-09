@@ -75,6 +75,7 @@ def encriptador_mensaje(mensaje):
 
     # Se agrega un 0 al final del mensaje.
     mensaje_codificado.append(0)
+    return mensaje_codificado
 
 
 mensaje = input("Ingrese un mensaje: ").lower() # Se convierte el mensaje a minúsculas.
@@ -93,8 +94,7 @@ for i in range(0, imagenArray.shape[0], 2): # Recorro las filas de a 2 pasos.
             pixel_primario = entorno[1, 1]
             
             # Defino los 3 pixeles en los que calculo la varianza (no terminado)
-            pixeles_secundarios = [entorno[0][0], entorno[0][1], entorno[1][0]]
-            print(pixeles_secundarios)
+            pixeles_secundarios = [entorno[0, 0], entorno[0, 1], entorno[1, 0]]
     
             # Calcular la varianza de cada canal de color por separado de los secundarios
             varianza_rojo = np.var([pixel[0] for pixel in pixeles_secundarios])
