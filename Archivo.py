@@ -86,11 +86,6 @@ def encriptador_mensaje(mensaje: str) -> list:
     mensaje_codificado.append(0)
     return mensaje_codificado
 
-
-mensaje = input("Ingrese un mensaje: ").lower() # Se convierte el mensaje a minúsculas.
-mensaje_encriptado = encriptador_mensaje(mensaje) # Encripto el mensaje llamado la funcion con el mensaje ingresado.
-
-
 def esconder_mensaje_imagen(direc_imagen, mensaje_encriptado):
     """
     Recibe un mensaje encriptado y lo esconde en una imagen.
@@ -142,6 +137,13 @@ def esconder_mensaje_imagen(direc_imagen, mensaje_encriptado):
 
                     index_del_mensaje += 1
     Imagen_final = Image.fromarray(imagenArray)
-    Imagen_final.save("imagen_con_mensaje.png")
+    return Imagen_final
 
-esconder_mensaje_imagen("baboon.jpg", mensaje_encriptado)
+mensaje = input("Ingrese un mensaje: ").lower() # Se convierte el mensaje a minúsculas.
+mensaje_encriptado = encriptador_mensaje(mensaje) # Encripto el mensaje llamado la funcion con el mensaje ingresado.
+
+direc_imagen = input("Ingrese la dirección de la imagen: ") # Se pide la dirección de la imagen donde se esconderá el mensaje.
+
+# Guardar la imagen con el mensaje escondido.
+imagen_encriptada = esconder_mensaje_imagen(direc_imagen, mensaje_encriptado)
+imagen_encriptada.save("imagen_con_mensaje.png")
