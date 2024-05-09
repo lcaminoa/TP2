@@ -1,5 +1,4 @@
-# TP2
-## Trabajo Práctico 2 de Pensamiento Computacional
+# Trabajo Práctico 2 de Pensamiento Computacional
 Lautaro Caminoa y Nicolás Heuser
 
 ## funciones.py
