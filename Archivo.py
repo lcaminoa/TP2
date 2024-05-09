@@ -93,6 +93,7 @@ mensaje_encriptado = encriptador_mensaje(mensaje) # Encripto el mensaje llamado 
 # Llamo a la funcion del filtro y guardo la imagen ya hecha array en una variable.
 imagenArray = filtro_kuwahara("baboon.jpg")
 
+index_del_mensaje = 0
 # Necesito que me analice cada celda de la imagen.
 for i in range(0, imagenArray.shape[0], 2): # Recorro las filas de a 2 pasos.
         for j in range(0, imagenArray.shape[1], 2): # Por cada fila, recorro las columnas de a 2 pasos.
