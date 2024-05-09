@@ -2,11 +2,13 @@ import numpy as np
 from PIL import Image
 from copy import deepcopy
 
-def filtro_kuwahara(direc_img):
+def filtro_kuwahara(direc_img: str) -> np.ndarray:
     """
     Recibe la dirección de una imagen y le aplica el filtro Kuwahara, luego se guarda en el dispositivo.
     Args:
         direc_img: dirección de la imagen a aplicar el filtro Kuwahara.
+    Returns:
+        Devuelve la imagen en formato de array de numpy.
     """
     # Abrir imagen
     img = Image.open(direc_img)
@@ -54,7 +56,14 @@ def filtro_kuwahara(direc_img):
     # Devolver la imagen final
     return img_np_final
 
-def encriptador_mensaje(mensaje):
+def encriptador_mensaje(mensaje: str) -> list:
+    """
+    Recibe un mensaje a encriptar y lo convierte en una lista de números.
+    Args:
+        mensaje: Mensaje a encriptar.
+    Returns:
+        Devuelve la lista con los valores del mensaje encriptado.
+    """
     #Diccionario con los valores de cada caracter.
     valores = {
         "a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7, "h": 8, "i": 9, "j": 10, 
@@ -84,7 +93,7 @@ encriptador_mensaje(mensaje) # Encripto el mensaje llamado la funcion con el men
 # Llamo a la funcion del filtro y guardo la imagen ya hecha array en una variable.
 imagenArray = filtro_kuwahara("baboon.jpg")
 
-# Necesito que me ...?
+# Necesito que me analice cada celda de la imagen.
 for i in range(0, imagenArray.shape[0], 2): # Recorro las filas de a 2 pasos.
         for j in range(0, imagenArray.shape[1], 2): # Por cada fila, recorro las columnas de a 2 pasos.
             
