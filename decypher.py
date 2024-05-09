@@ -7,5 +7,5 @@ def main():
     mensaje = escribir_mensaje(decifrar_mensaje_oculto(direc_imagen_encriptada))
     print(f"El mensaje oculto es: {mensaje}")
 
-while __name__ == "__main__":
+if __name__ == "__main__":
     main()

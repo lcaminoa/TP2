@@ -11,5 +11,5 @@ def main():
     imagen_encriptada = esconder_mensaje_imagen(img_base, mensaje_encriptado)
     imagen_encriptada.save(salida)
 
-while __name__ == "__main__":
+if __name__ == "__main__":
     main()
