@@ -32,13 +32,9 @@ def filtro_kuwahara(direc_img: str) -> np.ndarray:
             # Dividir este entorno en cuatro cuadrantes.
             cuadrantes = [entorno[:3, :3], entorno[:3, 2:], entorno[2:, :3], entorno[2:, 2:]]
 
-            # El slicing termina en :3 porque el 3 no se incluye, queda de 0 a 2.
-
             # Calcular la varianza de los canales rojo, verde y azul y sumar estas varianzas.
             varianzas = [np.var(cuadrante, axis=(0, 1)) for cuadrante in cuadrantes] # Se agrega a la lista las varianzas de cada cuadrante.
-            """
-            axis=(0, 1) estaría calculando la varianza de cada canal de color en cada cuadrante.
-            """
+            
             varianzas_totales = [np.sum(varianza) for varianza in varianzas]
             
             # Seleccionar el cuadrante con la suma de varianzas más baja
