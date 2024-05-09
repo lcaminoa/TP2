@@ -146,4 +146,5 @@ direc_imagen = input("Ingrese la dirección de la imagen: ") # Se pide la direcc
 
 # Guardar la imagen con el mensaje escondido.
 imagen_encriptada = esconder_mensaje_imagen(direc_imagen, mensaje_encriptado)
-imagen_encriptada.save("imagen_con_mensaje.png")
+nombre_imagen_encriptada = input("Ingrese el nombre de la imagen con el mensaje: ")
+imagen_encriptada.save(nombre_imagen_encriptada)
