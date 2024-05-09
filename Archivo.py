@@ -105,7 +105,6 @@ for i in range(0, imagenArray.shape[0], 2): # Recorro las filas de a 2 pasos.
             canal_menor_varianza = np.argmin([varianza_rojo, varianza_verde, varianza_azul])
             #print(canal_menor_varianza)
 
-
             promedio_suma = 0
             # Calcular el promedio de los pixeles secundarios en el canal con menor varianza
             for pixel in pixeles_secundarios:
