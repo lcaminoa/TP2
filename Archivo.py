@@ -86,7 +86,7 @@ def encriptador_mensaje(mensaje: str) -> list:
     mensaje_codificado.append(0)
     return mensaje_codificado
 
-def esconder_mensaje_imagen(direc_imagen, mensaje_encriptado):
+def esconder_mensaje_imagen(direc_imagen: str, mensaje_encriptado: list) -> Image:
     """
     Recibe un mensaje encriptado y lo esconde en una imagen.
     Args:
@@ -95,7 +95,6 @@ def esconder_mensaje_imagen(direc_imagen, mensaje_encriptado):
     Returns:
         Devuelve la imagen con el mensaje escondido.
     """
-
     # Llamo a la funcion del filtro y guardo la imagen ya hecha array en una variable.
     imagenArray = filtro_kuwahara(direc_imagen)
 
