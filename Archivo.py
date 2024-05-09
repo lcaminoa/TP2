@@ -79,11 +79,12 @@ def encriptador_mensaje(mensaje):
 
 
 mensaje = input("Ingrese un mensaje: ").lower() # Se convierte el mensaje a minúsculas.
-encriptador_mensaje(mensaje) # Encripto el mensaje llamado la funcion con el mensaje ingresado.
+mensaje_encriptado = encriptador_mensaje(mensaje) # Encripto el mensaje llamado la funcion con el mensaje ingresado.
 
 # Llamo a la funcion del filtro y guardo la imagen ya hecha array en una variable.
 imagenArray = filtro_kuwahara("baboon.jpg")
 
+index_del_mensaje = 0
 # Necesito que me ...?
 for i in range(0, imagenArray.shape[0], 2): # Recorro las filas de a 2 pasos.
         for j in range(0, imagenArray.shape[1], 2): # Por cada fila, recorro las columnas de a 2 pasos.
@@ -105,11 +106,19 @@ for i in range(0, imagenArray.shape[0], 2): # Recorro las filas de a 2 pasos.
             canal_menor_varianza = np.argmin([varianza_rojo, varianza_verde, varianza_azul])
             #print(canal_menor_varianza)
 
-            promedio_suma = 0
-            # Calcular el promedio de los pixeles secundarios en el canal con menor varianza
-            for pixel in pixeles_secundarios:
-                promedio_suma += pixel[canal_menor_varianza]
-            promedio = promedio_suma / 3
+            if index_del_mensaje <= len(mensaje_encriptado)-1:
+            
+                promedio_suma = 0
+                # Calcular el promedio de los pixeles secundarios en el canal con menor varianza
+                for pixel in pixeles_secundarios:
+                    promedio_suma += pixel[canal_menor_varianza]
+                promedio = promedio_suma / 3
+            
+                # Nuevo valor del pixel primario. Le sumo el numero del mensaje encriptado y hago modulo 256.
+                nuevo_pixel = (promedio + mensaje_encriptado[index_del_mensaje]) % 256
+            
+                # Asignar este promedio al pixel primario en el canal calculado
+                pixel_primario[canal_menor_varianza] = nuevo_pixel
 
-            # Asignar este promedio al pixel primario en el canal calculado
-            pixel_primario[canal_menor_varianza] = promedio
+                index_del_mensaje += 1
+                
